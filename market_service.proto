@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package market;
+
+// 市场信息服务
+service MarketService {
+    // 加载市场数据
+    rpc LoadMarkets (MarketRequest) returns (MarketResponse) {}
+}
+
+// 市场请求
+message MarketRequest {
+    string exchange = 1;  // 交易所名称
+}
+
+// 市场信息
+message MarketInfo {
+    string id = 1;       // 市场ID
+    string symbol = 2;   // 交易对符号
+    string base = 3;     // 基础货币
+    string quote = 4;    // 计价货币
+    bool active = 5;     // 是否激活
+}
+
+// 市场响应
+message MarketResponse {
+    map<string, MarketInfo> markets = 1;  // 市场数据映射
+} 
