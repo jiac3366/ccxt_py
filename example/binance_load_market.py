@@ -4,6 +4,7 @@ import logging
 import configparser
 from typing import Dict, Any
 import asyncio
+import json
 
 # 添加父目录到 Python 路径以导入 ExchangeManager
 # print(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -52,13 +53,17 @@ async def main():
         exchange.options = {**exchange.options, **exchange_config}
         
         logger.info("Loading Binance markets...")
-        markets = await exchange.load_markets()
+        markets = exchange.load_markets()
         
         # 打印市场信息
         logger.info(f"Successfully loaded {len(markets)} markets")
+        # save to markets.json in tests/test_data
+        with open('tests/test_data/markets.json', 'w') as f:
+            json.dump(markets, f)
         
         # 打印一些示例市场数据
         sample_symbols = list(markets.keys())[:5]  # 取前5个交易对作为样本
+
         for symbol in sample_symbols:
             market = markets[symbol]
             logger.info(f"\nMarket info for {symbol}:")

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package market;
+package proto;
 
 // 市场信息服务
 service MarketService {

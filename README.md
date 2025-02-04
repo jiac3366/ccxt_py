@@ -15,7 +15,8 @@ pip install -r requirements.txt
 
 2. 生成 gRPC 代码：
 ```bash
-python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. market_service.proto
+mkdir proto
+python -m grpc_tools.protoc -I. --python_out=./proto --grpc_python_out=./proto market_service.proto
 ```
 
 3. 配置交易所 API（可选）：
